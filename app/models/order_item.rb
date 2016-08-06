@@ -1,5 +1,6 @@
 class OrderItem < ActiveRecord::Base
-  belongs_to :books
-  has_many :customers, :through => :orders
-  has_many :users, :through => :orders
+  belongs_to :book
+  belongs_to :order
+  has_many :customers, :through => :order
+  has_many :users, :through => :order
 end
