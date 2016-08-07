@@ -12,7 +12,7 @@ Book.create(title: "A Rabbit's Guide to Prague", printing_cost_czk: 151, isbn: "
 
 Customer.create(first_name: "Jessica", last_name: "Gilpin", company: "Amadito and Friends", email: "jessica@sun-state.com")
 
-User.create(first_name: "Sarah", last_name: "Sucha", password: "123")
+User.create(first_name: "Sarah", last_name: "Sucha", email: "sarahsucha@gmail.com", password: "123")
 
 Order.create(sold_by_id: 1, customer_id: 1)
 
