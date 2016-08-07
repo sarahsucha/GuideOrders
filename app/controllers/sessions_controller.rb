@@ -1,5 +1,6 @@
 # Session NEW
 get '/sessions/new' do
+  #session.destroy
   erb :"sessions/new"
 end
 
