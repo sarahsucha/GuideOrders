@@ -1,0 +1,17 @@
+<% if !current_user %>
+  <p>This website is for Rabbit Guide employees only.</p>
+  <% if @errors %>
+    <% @errors.each do |error_message| %>
+    <%= error_message %>
+    <% end %>
+  <% end %>
+  <form action="/sessions" method="POST">
+    <label>Email:</label>
+    <input type="email" name="email">
+
+    <label>Password:</label>
+    <input type="password" name="password">
+
+    <input type="submit" value="Login">
+  </form>
+<% end %>

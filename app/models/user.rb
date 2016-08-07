@@ -1,4 +1,3 @@
-require 'bcrypt'
 
 class User < ActiveRecord::Base
   has_many :orders, { :foreign_key => :sold_by_id }
@@ -13,5 +12,9 @@ class User < ActiveRecord::Base
   def password=(new_password)
     @password = Password.create(new_password)
     self.password_hash = @password
+  end
+
+  def authenticate(input_password)
+    self.password == input_password
   end
 end
