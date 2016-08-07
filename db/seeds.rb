@@ -1,3 +1,10 @@
+Book.delete_all
+Customer.delete_all
+User.delete_all
+Order.delete_all
+OrderItem.delete_all
+
+
 Book.create(title: "A Rabbit's Guide to Venice", printing_cost_czk: 150, isbn: "978-3-16-148410-0", publish_date: DateTime.new(2013, 12, 10), inventory: 100, original_inventory: 300)
 
 Book.create(title: "A Rabbit's Guide to Prague", printing_cost_czk: 151, isbn: "978-3-16-148410-0", publish_date: DateTime.new(2015, 12, 10), inventory: 400, original_inventory: 700)
