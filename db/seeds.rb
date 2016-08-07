@@ -14,7 +14,7 @@ Customer.create(first_name: "Jessica", last_name: "Gilpin", company: "Amadito an
 
 User.create(first_name: "Sarah", last_name: "Sucha", email: "sarahsucha@gmail.com", password: "123")
 
-Order.create(sold_by_id: 1, customer_id: 1)
+Order.create(sold_by_id: 1, customer_id: 1, sold_date: DateTime.new(2015, 12, 01) )
 
 OrderItem.create(quantity: 1, currency_type: "USD", price_paid_per_book_orig: 1400, book_id: 1, order_id: 1)
 
