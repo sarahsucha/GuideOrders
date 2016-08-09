@@ -1,0 +1,37 @@
+<h2>Add a New Order</h2>
+
+<form action="/orders" method="POST">
+
+  <label>Date Sold</label>
+  <input type="date" name="sold_date"><br>
+
+  <label>Customer's First Name</label>
+  <input type="text" name="customer[first_name]"><br>
+
+  <label>Customer's Last Name</label>
+  <input type="text" name="customer[last_name]"><br>
+
+  <label>Customer's Company</label>
+  <input type="text" name="customer[company]"><br>
+
+  <label>Customer's Email</label>
+  <input type="email" name="customer[email]"><br>
+
+  <label>Number of Venice Books Sold</label>
+  <input type="number" name="order_item[quantity]"><br>
+
+  <label>Number of Prague Books Sold</label>
+  <input type="number" name="order_item[quantity]"><br>
+
+  <label>Currency Sold Book In</label>
+  <select name="order_item[currency_type]">
+      <option value="CZK">CZK</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+      <option value="USD">USD</option>
+  </select><br>
+
+  <label>Price Paid Per Book (Original Currency)</label>
+  <input type="number" name="order_item[price_paid_per_book_orig]"><br>
+
+</form>
