@@ -1,5 +1,4 @@
 # Session NEW
-# TODO get '/login'
 get '/login' do
   #session.destroy
   erb :"sessions/new"

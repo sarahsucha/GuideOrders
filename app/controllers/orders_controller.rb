@@ -1,7 +1,6 @@
 # Orders INDEX (list of all orders, regardless of user)
 
 # Orders NEW
-# TODO get '/users/:user_id/orders/new' do
 get '/users/:user_id/orders/new' do
   erb :'orders/new'
 end
@@ -14,6 +13,11 @@ post '/orders' do
   p (params)
   redirect "/users/#{session.id}/orders"
 end
+
+#TODO decide if will ask for sold date or if will use created_at - probably better to ask for sold date and use that on order view page.
+
+# {"sold_date"=>"2016-08-10", "customer"=>{"first_name"=>"e", "last_name"=>"e", "company"=>"e", "email"=>"e@y.com"}, "order_item"=>{"quantity"=>"2", "currency_type"=>"EUR", "price_paid_per_book_orig"=>"13"}}
+
 
 # Orders LIST BY USER
 # Can use same erb page for list by user and list all, just change what data is passed from the db.
