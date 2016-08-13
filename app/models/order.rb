@@ -4,6 +4,10 @@ class Order < ActiveRecord::Base
   has_many :order_items
 
   validates :sold_date, presence: true
+  validates :user_id, presence: true
+  validates :currency_type, presence: true
+
+  # validates :venice_or_prague
 
   def order_total
     order_total = 0
@@ -13,4 +17,10 @@ class Order < ActiveRecord::Base
     end
     order_total
   end
+
+  private
+  #
+  # def venice_or_prague
+  #   if
+  # end
 end

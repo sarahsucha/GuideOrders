@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :order_items, :through => :orders
 
+  validates :email, presence: true
+  validates :password, presence: true
+
   include BCrypt
 
   def password
