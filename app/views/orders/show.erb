@@ -1,14 +1,17 @@
-<h2>Orders Page</h2>
-
-<% @user_orders.each do |order_item|%>
+<h2>Orders Items Page</h2>
+<% @user_orders.each do |order|%>
   <div class="orderItem">
-  Order ID: <%= order_item.order_id %><br>
+  Order ID: <%= order.id %><br>
   <!--  TODO how to format date to just date month/day/year? -->
-  Order Record Created At: <%= order_item.created_at %><br>
-  Book Sold: <%= order_item.book.title %><br>
-  Quantity Sold: <%= order_item.quantity %><br>
-  Price Paid: <%= order_item.price_paid_per_book_orig %><br>
-  <% @order = order_item.order%>
-  Is Reconciled? <%= @order.is_reconciled%><br><br><br>
+  Order Record Created On: <%= order.sold_date %><br>
+  Customer: <%= order.customer.first_name %> <%= order.customer.last_name %><br>
+  <% @order_items = order.order_items %>
+  <% @order_items.each do |order_item| %>
+    Book Sold: <%= order_item.book.title %><br>
+    Quantity Sold: <%= order_item.quantity %><br>
+    Currency: <%= order_item.currency_type %><br>
+    Price Paid: <%= order_item.price_paid_per_book_orig %><br>
+  <% end %>
+  Is Reconciled? <%= order.is_reconciled%><br><br><br>
 </div>
 <% end %>

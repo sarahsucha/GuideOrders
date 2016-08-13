@@ -1,6 +1,6 @@
 <h2>Add a New Order</h2>
 
-<form action="/orders" method="POST">
+<form action="/users/<%= session[:id] %>/orders" method="POST">
 
   <label>Date Sold</label>
   <input type="date" name="sold_date"><br>
@@ -18,10 +18,16 @@
   <input type="email" name="customer[email]"><br>
 
   <label>Number of Venice Books Sold</label>
-  <input type="number" name="order_item[quantity]"><br>
+  <input type="number" name="venice_quantity"><br>
+
+  <label>Price Paid Per Venice Book (Original Currency)</label>
+  <input type="number" name="venice_price_paid_per_book_orig"><br>
 
   <label>Number of Prague Books Sold</label>
-  <input type="number" name="order_item[quantity]"><br>
+  <input type="number" name="prague_quantity"><br>
+
+  <label>Price Paid Per Prague Book (Original Currency)</label>
+  <input type="number" name="prague_price_paid_per_book_orig"><br>
 
   <label>Currency Sold Book In</label>
   <select name="order_item[currency_type]">
@@ -31,9 +37,6 @@
       <option value="USD">USD</option>
   </select><br>
 
-  <label>Price Paid Per Book (Original Currency)</label>
-  <input type="number" name="order_item[price_paid_per_book_orig]"><br>
-
-  <input type="submit" value="Save Order"> 
+  <input type="submit" value="Save Order">
 
 </form>
