@@ -1,8 +1,16 @@
-<h2>Order Summary</h2>
 
-<% @user_orders.each do |order|%>
+<% if @orders_all == true %>
+  <h2>All Orders Summary</h2>
+<% else %>
+  <h2>Your Order Summary</h2>
+<% end %>
+
+<% @orders.each do |order|%>
   <div class="orderItem<%= order.id %>">
     Order ID: <%= order.id %><br>
+    <% if @orders_all == true %>
+      Order Made By: <%= order.user.first_name %> <%= order.user.last_name %><br>
+    <% end %>
     Order Record Created On: <%= order.sold_date.day %>/<%= order.sold_date.month %>/<%= order.sold_date.year %><br>
     Customer: <%= order.customer.first_name %> <%= order.customer.last_name %><br>
     Currency: <%= order.currency_type %><br>

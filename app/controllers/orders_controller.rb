@@ -51,7 +51,7 @@ end
 # Can use same erb page for list by user and list all, just change what data is passed from the db.
 get '/users/:user_id/orders' do
   @user = User.find(session[:id])
-  @user_orders = @user.orders
+  @orders = @user.orders
   # @order_total = 0
   erb :'orders/show'
 end
@@ -69,10 +69,12 @@ end
 
 #<OrderItem id: 1, quantity: 1, currency_type: "USD", price_paid_per_book_orig: 1400, book_id: 1, order_id: 1, czk_conversion_id: nil, created_at: "2016-08-07 20:15:53", updated_at: "2016-08-07 20:15:53">]
 
-# # Orders LIST ALL
-# get '/orders' do
-#
-# end
+# Orders LIST ALL
+get '/orders' do
+  @orders = Order.all
+  @orders_all = true
+  erb :'orders/show'
+end
 #
 # # Orders UPDATE
 # put 'users/:user_id/orders/:id/edit' do

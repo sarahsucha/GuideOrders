@@ -1,6 +1,6 @@
 
 class User < ActiveRecord::Base
-  has_many :orders, { :foreign_key => :sold_by_id }
+  has_many :orders
   has_many :order_items, :through => :orders
 
   include BCrypt
