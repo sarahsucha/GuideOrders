@@ -1,17 +1,19 @@
 <h2>Orders Items Page</h2>
 <% @user_orders.each do |order|%>
+  <% @order_total = 0 %>
   <div class="orderItem">
   Order ID: <%= order.id %><br>
-  <!--  TODO how to format date to just date month/day/year? -->
-  Order Record Created On: <%= order.sold_date %><br>
+  Order Record Created On: <%= order.sold_date.day %>/<%= order.sold_date.month %>/<%= order.sold_date.year %><br>
   Customer: <%= order.customer.first_name %> <%= order.customer.last_name %><br>
+  Currency: <%= order.currency_type %><br>
   <% @order_items = order.order_items %>
   <% @order_items.each do |order_item| %>
     Book Sold: <%= order_item.book.title %><br>
     Quantity Sold: <%= order_item.quantity %><br>
-    Currency: <%= order_item.currency_type %><br>
     Price Paid: <%= order_item.price_paid_per_book_orig %><br>
   <% end %>
+  Order Total: <%= @order_total %><br>
+  Order Total in CZK:
   Is Reconciled? <%= order.is_reconciled%><br><br><br>
 </div>
 <% end %>

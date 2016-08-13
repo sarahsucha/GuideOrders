@@ -28,9 +28,9 @@
         <input type="hidden" name="_method" value="DELETE">
         <input type="submit" value="Logout">
       </form></li>
-      <li><a>Record a New Order</a></li>
-      <li><a>See Your Orders</a></li>
-      <li><a>See All Orders</a></li>
+      <li><a href="/users/<%= session[:id] %>/orders/new">Record a New Order</a></li>
+      <li><a href="/users/<%= session[:id] %>/orders">See Your Orders</a></li>
+      <li><a href="/orders">See All Orders</a></li>
       <li><a>Reconcile Orders(future)</a></li>
       <% end %>
     </nav>

@@ -1,34 +1,37 @@
 # Orders INDEX (list of all orders, regardless of user)
 
-# Orders NEW
+# Orders CREATE
 get '/users/:user_id/orders/new' do
   erb :'orders/new'
 end
 
-# Orders CREATE
+# Orders READ
 post '/users/:id/orders' do
-# post '/orders' do
-  #print out the date to see if in a format which can save to db
-  #will get a number like $14.00 need to convert to 1400 to save to db
-  p "I'm posting in orders"
   p "*" * 80
-  p (params)
-  # customer = Customer.new(first_name: params[:first_name], last_name: params[:last_name], company: params[:company], email: params[:email])
-  customer = Customer.new(params[:customer])
-  # must save the customer before can get the customer id
-  order = Order.new(sold_by_id: session[:id], customer_id: customer[:id], sold_date: params["sold_date"])
-  # for each of the order items - must save the order before can get the order id
-  venice_item = OrderItem.new(params[:order_item], book_id: 1, order_id: order[:id], quantity: params["venice_quantity"])
-  prague_item = OrderItem.new(params[:order_item], book_id: 2, order_id: order[:id], quantity: params["prague_quantity"])
-  p "*" * 80
-  p customer
-  p "*" * 80
-
-  p order
-  # create a new customer
-  # create a new order
-  # create new order items
-  redirect "/users/#{session[:id]}/orders"
+  p params
+  p params["customer_email"]
+  #TODO how to update a customer - so we find their email... but let's say that now I know their last name, and fill it in (in the existing customer record, no last name is present). ALSO consider, as a user, maybe I want to be lazy and just enter the email address and not fill in the other information... in that case, I should select something if I want to update and then it will update the customer, otherwise it will just find by email and not update.
+  # Also consider that I may have a repeating customer and not have their email address... or how do I update their email address (will need to be a future implementation of customer management and updating.)
+  customer = Customer.find_by(email: params["customer_email"])
+  if customer == nil
+    customer = Customer.create(first_name: params["customer_first_name"], last_name: params["customer_last_name"], company: params["customer_company"], email: params["customer_email"])
+  end
+  order = Order.new(sold_by_id: session[:id], customer_id: customer[:id], sold_date: params["sold_date"], currency_type: params["currency_type"])
+  if order.save
+    #TODO will get a number like 14.00 need to convert to 1400 to save to db
+    venice_item = OrderItem.new(quantity: params["venice_quantity"], price_paid_per_book_orig: params["venice_price_paid_per_book_orig"], book_id: 1, order_id: order[:id])
+    prague_item = OrderItem.new(quantity: params["prague_quantity"], price_paid_per_book_orig: params["prague_price_paid_per_book_orig"], book_id: 2, order_id: order[:id])
+    if venice_item.save && prague_item.save
+      redirect "/users/#{session[:id]}/orders"
+    else
+      @venice_errors = venice_item.errors.full_messages
+      @prague_errors = prague_item.errors.full_messages
+      erb :"orders/new"
+    end
+  else
+    @order_errors = order.errors.full_messages
+    erb :"orders/new"
+  end
 end
 
 #TODO decide if will ask for sold date or if will use created_at - probably better to ask for sold date and use that on order view page.
@@ -42,13 +45,15 @@ end
 # Can use same erb page for list by user and list all, just change what data is passed from the db.
 get '/users/:user_id/orders' do
   @user = User.find(session[:id])
-  p @user
   @user_orders = @user.orders
-  p @user_orders
+  # @order_total = 0
   erb :'orders/show'
 end
 
-#<ActiveRecord::Associations::CollectionProxy [#<Order id: 1, sold_by_id: 1, customer_id: 1, sold_date: "2015-12-01", is_reconciled: false>]>
+# <% @order_total += order_item.quantity * order_item.price_paid_per_book_orig %>
+#
+#
+# #<ActiveRecord::Associations::CollectionProxy [#<Order id: 1, sold_by_id: 1, customer_id: 1, sold_date: "2015-12-01", is_reconciled: false>]>
 
 # irb(main):002:0> Order.last.order_items
 # D, [2016-08-12T17:26:49.498890 #5343] DEBUG -- :   Order Load (2.7ms)  SELECT  "orders".* FROM "orders"  ORDER BY "orders"."id" DESC LIMIT 1
@@ -63,7 +68,7 @@ end
 #
 # end
 #
-# # Orders EDIT
+# # Orders UPDATE
 # put 'users/:user_id/orders/:id/edit' do
 #
 # end
