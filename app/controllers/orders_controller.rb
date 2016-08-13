@@ -17,6 +17,7 @@ post '/users/:id/orders' do
   if customer == nil
     customer = Customer.create(first_name: params["customer_first_name"], last_name: params["customer_last_name"], company: params["customer_company"], email: params["customer_email"])
   end
+
   order = Order.new(user_id: session[:id], customer_id: customer[:id], sold_date: params["sold_date"], currency_type: params["currency_type"])
   if order.save
     # if quantity does not exist for either venice or prague
@@ -47,14 +48,17 @@ post '/users/:id/orders' do
       prague_item = OrderItem.create(quantity: params["prague_quantity"], price_paid_per_book_orig: prague_price_to_save, book_id: 2, order_id: order[:id])
 
       redirect "/users/#{session[:id]}/orders"
-    else
-      @errors
-      erb :"orders/new"
+    # else
+    #   @errors
+    #   erb :"orders/new"
     end
   else
     @errors = order.errors.full_messages
-    erb :"orders/new"
+    # erb :"orders/new"
   end
+  if @errors.length > 0
+    erb :"orders/new"
+  end 
 end
 
 # Orders LIST BY USER

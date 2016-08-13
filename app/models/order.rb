@@ -7,13 +7,13 @@ class Order < ActiveRecord::Base
   validates :user_id, presence: true
   validates :currency_type, presence: true
 
-  def order_total
+  def display_order_total
     order_total = 0
     order_items = self.order_items
     order_items.each do |order_item|
       order_total += order_item.price_paid_per_book_orig * order_item.quantity
     end
-    order_total
+    '%.2f' % (order_total.to_f / 100)
   end
 
 

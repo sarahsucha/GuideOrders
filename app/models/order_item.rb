@@ -9,13 +9,9 @@ class OrderItem < ActiveRecord::Base
   validates :book_id, presence: true
   validates :order_id, presence: true
 
-  # validates :venice_or_prague
+  def display_item_amount
+    amount = self.price_paid_per_book_orig.to_f
+    '%.2f' % (amount / 100)
+  end
 
-  private
-
-  # def venice_or_prague
-  #   if !(venice_quantity.present? || prague_quantity.present?)
-  #     errors.add(:quantity, "Quantity for either Venice or Prague must be filled in")
-  #   end
-  # end
 end
