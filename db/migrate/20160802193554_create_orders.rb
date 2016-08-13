@@ -3,7 +3,7 @@ class CreateOrders < ActiveRecord::Migration
     create_table :orders do |t|
       t.integer :sold_by_id
       t.integer :customer_id
-      t.date :sold_date null: false
+      t.date :sold_date, null: false
       t.string :currency_type, limit: 5
       t.integer :czk_conversion_id
       t.boolean :is_reconciled, default: false
