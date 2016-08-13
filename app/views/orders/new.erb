@@ -1,5 +1,13 @@
 <h2>Add a New Order</h2>
 
+<div class="error">
+  <% if @errors.length > 0 %>
+    <% @errors.each do |error| %>
+      <%= error %>
+    <% end %>
+  <% end %>
+</div>
+
 <form action="/users/<%= session[:id] %>/orders" method="POST">
 
   <label>Date Sold</label>

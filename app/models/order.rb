@@ -7,8 +7,6 @@ class Order < ActiveRecord::Base
   validates :user_id, presence: true
   validates :currency_type, presence: true
 
-  # validates :venice_or_prague
-
   def order_total
     order_total = 0
     order_items = self.order_items
@@ -18,9 +16,5 @@ class Order < ActiveRecord::Base
     order_total
   end
 
-  private
-  #
-  # def venice_or_prague
-  #   if
-  # end
+
 end
