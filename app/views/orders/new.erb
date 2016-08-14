@@ -27,10 +27,10 @@
 
   <label>Currency Sold Book In</label>
   <select name="currency_type">
-    <option value="CZK">CZK</option>
-    <option value="EUR">EUR</option>
-    <option value="GBP">GBP</option>
-    <option value="USD">USD</option>
+    <option value="CZK" <%= (params['currency_type'] == "CZK") ? 'selected="selected"' : '' %>>CZK</option>
+    <option value="EUR" <%= (params['currency_type'] == "EUR") ? 'selected="selected"' : '' %>>EUR</option>
+    <option value="GBP" <%= (params['currency_type'] == "GBP") ? 'selected="selected"' : '' %>>GBP</option>
+    <option value="USD" <%= (params['currency_type'] == "USD") ? 'selected="selected"' : '' %>>USD</option>
   </select><br>
 
   <label>Number of Venice Books Sold</label>
@@ -43,7 +43,7 @@
   <input type="number" name="prague_quantity" value="<%= params['prague_quantity'] ? params['prague_quantity'] : '' %>"><br>
 
   <label>Price Paid Per Prague Book (Original Currency)</label>
-  <input type="number" name="prague_price_paid_per_book_orig" value="<%= params['prague_price_paid_per_book_orig'] ? params['prague_price_paid_per_book_orig'] : '' %>"><br>
+  <input type="number" step="any" name="prague_price_paid_per_book_orig" value="<%= params['prague_price_paid_per_book_orig'] ? params['prague_price_paid_per_book_orig'] : '' %>"><br>
 
   <input type="submit" value="Save Order">
 

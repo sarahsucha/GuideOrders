@@ -17,6 +17,7 @@ class Order < ActiveRecord::Base
   end
 
   def convert_to_czk(rate)
+    p self.order_total
     self.order_total / rate
   end
 

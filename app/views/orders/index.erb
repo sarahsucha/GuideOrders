@@ -5,22 +5,5 @@
 <% end %>
 
 <% @orders.each do |order|%>
-  <div class="orderItem<%= order.id %>">
-    Order ID: <%= order.id %><br>
-    <% if @orders_all == true %>
-      Order Made By: <%= order.user.first_name %> <%= order.user.last_name %><br>
-    <% end %>
-    Sell Date: <%= order.sold_date.day %>/<%= order.sold_date.month %>/<%= order.sold_date.year %><br>
-    Customer: <%= order.customer.first_name %> <%= order.customer.last_name %><br>
-    Currency: <%= order.currency_type %><br>
-    <% @order_items = order.order_items %>
-    <% @order_items.each do |order_item| %>
-      Book Sold: <%= order_item.book.title %><br>
-      Quantity Sold: <%= order_item.quantity %><br>
-      Price Paid: <%= order_item.display_item_amount %><br>
-    <% end %>
-    Order Total: <%= order.display_order_total %><br>
-    Order Total in CZK:<br>
-    Is Reconciled? <%= order.is_reconciled%><br><br><br>
-  </div>
+  <%= erb(:"orders/_show", :layout => false, :locals => { :order => order }) %>
 <% end %>
