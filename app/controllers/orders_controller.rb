@@ -58,13 +58,25 @@ post '/users/:id/orders' do
   end
   if @errors.length > 0
     erb :"orders/new"
-  end 
+  end
 end
 
+# create a way to see an individual order detail
+# Orders DETAIL
+# get '/orders/:id' do
+#   @order = Order.find(params[:id])
+#   @order_items =
+# end
+
+# combine all of the order detail views
 # Orders LIST BY USER
 get '/users/:user_id/orders' do
   @user = User.find(session[:id])
   @orders = @user.orders
+  @r = RestClient.get 'http://api.fixer.io/latest', {:params => {:symbols => "USD,EUR,GBP", :base => "CZK", :date => "2016-08-11"}}
+  p "*" * 80
+  p JSON.parse(@r.body)
+  p JSON.parse(@r.body)["base"]
   # @order_total = 0
   erb :'orders/show'
 end
@@ -72,6 +84,7 @@ end
 # Orders LIST ALL
 get '/orders' do
   @orders = Order.all
+
   @orders_all = true
   erb :'orders/show'
 end
