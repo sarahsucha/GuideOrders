@@ -4,6 +4,23 @@ body {
   background-color: #eee;
 }
 
+.panel {
+  margin-right: 10px;
+  margin-left: 10px;
+  padding-right: 0px;
+  padding-left: 0px;
+  min-height: 320px;
+}
+/*
+<div class="col-md-4 panel panel-default order1" style="
+    padding-right: 0px;
+    padding-left: 0px;
+    left: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    right: auto;
+">*/
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -41,7 +58,7 @@ body {
 
 /* Customize container */
 @media (min-width: 768px) {
-  .main {
+  .form-width {
     max-width: 730px;
     margin: 0 auto;
   }

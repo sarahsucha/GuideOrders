@@ -4,6 +4,8 @@
   <h2>Your Order Summary</h2>
 <% end %>
 
-<% @orders.each do |order|%>
-  <%= erb(:"orders/_show", :layout => false, :locals => { :order => order }) %>
-<% end %>
+<div>
+  <% @orders.each do |order|%>
+    <%= erb(:"orders/_show", :layout => false, :locals => { :order => order }) %>
+  <% end %>
+</div>

@@ -33,11 +33,11 @@
 
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="http://www.rabbitsguides.com">Visit the Rabbit Guides Website</a></li>
+            <li><a href="http://www.rabbitsguides.com">Rabbit Guides Website</a></li>
             <% if current_user %>
-            <li><a href="/users/<%= session[:id] %>/orders/new">Record a New Order</a></li>
-            <li><a href="/users/<%= session[:id] %>/orders">See Your Orders</a></li>
-            <li><a href="/orders">See All Orders</a></li>
+            <li><a href="/users/<%= session[:id] %>/orders/new">New Order</a></li>
+            <li><a href="/users/<%= session[:id] %>/orders">Your Orders</a></li>
+            <li><a href="/orders">All Orders</a></li>
             <li><a>Reconcile Orders(future)</a></li>
             <!-- TODO - style this as an <a> tag with jquery -->
             <li><form action="/sessions" method="POST">
@@ -50,7 +50,7 @@
       </div><!-- end container -->
     </nav>
   </header>
-  <div class="main">
+  <div class="container">
     <%= yield %>
   </div>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

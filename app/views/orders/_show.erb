@@ -1,16 +1,29 @@
-<div class="order<%= order.id %>">
-  Order ID: <%= order.id %><br>
-  Order Made By: <%= order.user.first_name %> <%= order.user.last_name %><br>
-  Sell Date: <%= order.sold_date.day %>/<%= order.sold_date.month %>/<%= order.sold_date.year %><br>
-  Customer: <%= order.customer.first_name %> <%= order.customer.last_name %><br>
-  Currency: <%= order.currency_type %><br>
-  <% order_items = order.order_items %>
-  <% order_items.each do |order_item| %>
-    Book Sold: <%= order_item.book.title %><br>
-    Quantity Sold: <%= order_item.quantity %><br>
-    Price Paid: <%= order_item.display_item_amount %> <%= order.currency_type %><br>
-  <% end %>
-  Order Total: <%= display_order_total(order) %> <%= order.currency_type %><br>
-  Order Total in CZK: <%= display_total_czk(order) %> CZK<br>
-  Is Reconciled? <%= order.is_reconciled %><br><br><br>
+<div class="col-md-5 panel panel-default order<%= order.id %>">
+  <div class="panel-heading">
+    <h3 class="panel-title">Order ID: <%= order.id %></h3>
+  </div>
+  <div class="panel-body">
+    Order Made By: <%= order.user.first_name %> <%= order.user.last_name %><br>
+    Sell Date: <%= order.sold_date.day %>/<%= order.sold_date.month %>/<%= order.sold_date.year %><br>
+    Customer: <%= order.customer.first_name %> <%= order.customer.last_name %><br>
+    Currency: <%= order.currency_type %><br>
+    <% order_items = order.order_items %>
+    <% order_items.each do |order_item| %>
+      Book Sold: <%= order_item.book.title %><br>
+      Quantity Sold: <%= order_item.quantity %><br>
+      Price Paid: <%= order_item.display_item_amount %> <%= order.currency_type %><br>
+    <% end %>
+    Order Total: <%= display_order_total(order) %> <%= order.currency_type %><br>
+    Order Total in CZK: <%= display_total_czk(order) %> CZK<br>
+    Is Reconciled? <%= order.is_reconciled %><br>
+  </div>
 </div>
+
+<!-- <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Panel title</h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div> -->
