@@ -1,17 +1,25 @@
-<% if !current_user %>
-  <p>This website is for Rabbit Guide employees only.</p>
-  <% if @errors %>
-    <% @errors.each do |error_message| %>
-    <%= error_message %>
-    <% end %>
+<div class="container">
+    <form class="form-signin" action="/sessions" method="POST">
+      <% if !current_user %>
+        <div class="alert alert-warning alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <strong>Warning!</strong> This website is for Rabbit Guide employees only.
+        </div>
+        <% if @errors %>
+          <% @errors.each do |error_message| %>
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Error!</strong> <%= error_message %>
+          </div>
+        <% end %>
+      <% end %>
+      <label for="email" class="sr-only">Email:</label>
+      <input id="email" class="form-control" placeholder="Email address" type="email" name="email" required autofocus>
+
+      <label for="password" class="sr-only">Password:</label>
+      <input id="password" class="form-control" placeholder="Password" type="password" name="password" required>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
   <% end %>
-  <form action="/sessions" method="POST">
-    <label>Email:</label>
-    <input type="email" name="email">
-
-    <label>Password:</label>
-    <input type="password" name="password">
-
-    <input type="submit" value="Login">
-  </form>
-<% end %>
+</div><!-- /container -->

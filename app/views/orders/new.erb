@@ -3,47 +3,98 @@
 <div class="error">
   <% if @errors.length > 0 %>
     <% @errors.each do |error| %>
-      <%= error %><br>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Error!</strong> <%= error %>
+      </div>
     <% end %>
   <% end %>
 </div>
 
-<form action="/users/<%= session[:id] %>/orders" method="POST">
+<form class="form-horizontal" action="/users/<%= session[:id] %>/orders" method="POST">
+  <div class="form-group">
+    <label for="sold_date" class="col-sm-4 control-label">Date Sold</label>
+    <div class="col-sm-7">
+      <input id="sold_date" type="date" class="form-control" name="sold_date" value="<%= params['sold_date'] ? params['sold_date'] : '' %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
 
-  <label>Date Sold</label>
-  <input type="date" name="sold_date" value="<%= params['sold_date'] ? params['sold_date'] : '' %>"><br>
+  <div class="form-group">
+    <label for="customer_first_name" class="col-sm-4 control-label">Customer's First Name</label>
+    <div class="col-sm-7">
+      <input id="customer_first_name" type="text" class="form-control" name="customer_first_name" value="<%= params['customer_first_name'] ? params['customer_first_name'] : '' %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
 
-  <label>Customer's First Name</label>
-  <input type="text" name="customer_first_name" value="<%= params['customer_first_name'] ? params['customer_first_name'] : '' %>"><br>
+  <div class="form-group">
+    <label for="customer_last_name" class="col-sm-4 control-label">Customer's Last Name</label>
+    <div class="col-sm-7">
+      <input id="customer_last_name" type="text" class="form-control" name="customer_last_name" value="<%= params['customer_last_name'] ? params['customer_last_name'] : '' %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
 
-  <label>Customer's Last Name</label>
-  <input type="text" name="customer_last_name" value="<%= params['customer_last_name'] ? params['customer_last_name'] : '' %>"><br>
+  <div class="form-group">
+    <label for="customer_company" class="col-sm-4 control-label">Customer's Company</label>
+    <div class="col-sm-7">
+      <input id="customer_company" type="text" class="form-control" name="customer_company" value="<%= params['customer_company'] ? params['customer_company'] : '' %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
 
-  <label>Customer's Company</label>
-  <input type="text" name="customer_company" value="<%= params['customer_company'] ? params['customer_company'] : '' %>"><br>
+  <div class="form-group">
+    <label for="customer_email" class="col-sm-4 control-label">Customer's Email</label>
+    <div class="col-sm-7">
+      <input id="customer_email" type="text" class="form-control" name="customer_email" value="<%= params['customer_email'] ? params['customer_email'] : '' %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
 
-  <label>Customer's Email</label>
-  <input type="email" name="customer_email" value="<%= params['customer_email'] ? params['customer_email'] : '' %>"><br>
+  <div class="form-group">
+    <label for="currency_type" class="col-sm-4 control-label">Currency Sold Book In</label>
+    <div class="col-sm-7">
+      <select class="form-control" name="currency_type">
+        <option value="CZK" <%= (params['currency_type'] == "CZK") ? 'selected="selected"' : '' %>>CZK</option>
+        <option value="EUR" <%= (params['currency_type'] == "EUR") ? 'selected="selected"' : '' %>>EUR</option>
+        <option value="GBP" <%= (params['currency_type'] == "GBP") ? 'selected="selected"' : '' %>>GBP</option>
+        <option value="USD" <%= (params['currency_type'] == "USD") ? 'selected="selected"' : '' %>>USD</option>
+      </select>
+    </div>
+  </div>
 
-  <label>Currency Sold Book In</label>
-  <select name="currency_type">
-    <option value="CZK" <%= (params['currency_type'] == "CZK") ? 'selected="selected"' : '' %>>CZK</option>
-    <option value="EUR" <%= (params['currency_type'] == "EUR") ? 'selected="selected"' : '' %>>EUR</option>
-    <option value="GBP" <%= (params['currency_type'] == "GBP") ? 'selected="selected"' : '' %>>GBP</option>
-    <option value="USD" <%= (params['currency_type'] == "USD") ? 'selected="selected"' : '' %>>USD</option>
-  </select><br>
+  <div class="form-group">
+    <label for="venice_quantity" class="col-sm-4 control-label">Number of Venice Books Sold</label>
+    <div class="col-sm-7">
+      <input id="venice_quantity" type="text" class="form-control" name="venice_quantity" value="<%= params['venice_quantity'] ? params['venice_quantity'] : '' %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
 
-  <label>Number of Venice Books Sold</label>
-  <input type="number" name="venice_quantity" value="<%= params['venice_quantity'] ? params['venice_quantity'] : '' %>"><br>
+  <div class="form-group">
+    <label for="venice_price_paid_per_book_orig" class="col-sm-4 control-label">Price Paid Per Venice Book (Original Currency)</label>
+    <div class="col-sm-7">
+      <input id="venice_price_paid_per_book_orig" type="text" class="form-control" name="venice_price_paid_per_book_orig" value="<%= params['venice_price_paid_per_book_orig'] ? params['venice_price_paid_per_book_orig'] : '' %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
 
-  <label>Price Paid Per Venice Book (Original Currency)</label>
-  <input type="number" step="any" name="venice_price_paid_per_book_orig" value="<%= params['venice_price_paid_per_book_orig'] ? params['venice_price_paid_per_book_orig'] : '' %>"><br>
+  <div class="form-group">
+    <label for="prague_quantity" class="col-sm-4 control-label">Number of Prague Books Sold</label>
+    <div class="col-sm-7">
+      <input id="prague_quantity" type="text" class="form-control" name="prague_quantity" value="<%= params['prague_quantity'] ? params['prague_quantity'] : '' %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
 
-  <label>Number of Prague Books Sold</label>
-  <input type="number" name="prague_quantity" value="<%= params['prague_quantity'] ? params['prague_quantity'] : '' %>"><br>
-
-  <label>Price Paid Per Prague Book (Original Currency)</label>
-  <input type="number" step="any" name="prague_price_paid_per_book_orig" value="<%= params['prague_price_paid_per_book_orig'] ? params['prague_price_paid_per_book_orig'] : '' %>"><br>
+  <div class="form-group">
+    <label for="prague_price_paid_per_book_orig" class="col-sm-4 control-label">Price Paid Per Prague Book (Original Currency)</label>
+    <div class="col-sm-7">
+      <input id="prague_price_paid_per_book_orig" type="text" class="form-control" name="prague_price_paid_per_book_orig" value="<%= params['prague_price_paid_per_book_orig'] ? params['prague_price_paid_per_book_orig'] : '' %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
 
   <input type="submit" value="Save Order">
 

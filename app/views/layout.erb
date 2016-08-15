@@ -6,35 +6,55 @@
     differences in how form elements appear between Firefox and IE
     See: http://necolas.github.com/normalize.css/
   -->
-  <link rel="stylesheet" href="/css/normalize.css">
+  <!-- <link rel="stylesheet" href="/css/normalize.css"> -->
   <!--
     application.css is where you put your styles
   -->
-  <link rel="stylesheet" href="/css/application.css">
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="/js/application.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/application.css">
 
   <title>Rabbit Guides Orders</title>
 </head>
 <body>
   <header>
-    <h1>Rabbit Guides Orders</h1>
-    <nav>
-      <li><a href="http://www.rabbitsguides.com">Visit the Rabbit Guides Website</a></li>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Rabbit Guides Orders</a>
+        </div> <!-- end navbar-header -->
 
-      <% if current_user %>
-      <li><form action="/sessions" method="POST">
-        <input type="hidden" name="_method" value="DELETE">
-        <input type="submit" value="Logout">
-      </form></li>
-      <li><a href="/users/<%= session[:id] %>/orders/new">Record a New Order</a></li>
-      <li><a href="/users/<%= session[:id] %>/orders">See Your Orders</a></li>
-      <li><a href="/orders">See All Orders</a></li>
-      <li><a>Reconcile Orders(future)</a></li>
-      <% end %>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="http://www.rabbitsguides.com">Visit the Rabbit Guides Website</a></li>
+            <% if current_user %>
+            <li><a href="/users/<%= session[:id] %>/orders/new">Record a New Order</a></li>
+            <li><a href="/users/<%= session[:id] %>/orders">See Your Orders</a></li>
+            <li><a href="/orders">See All Orders</a></li>
+            <li><a>Reconcile Orders(future)</a></li>
+            <!-- TODO - style this as an <a> tag with jquery -->
+            <li><form action="/sessions" method="POST">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit" class="btn btn-link">Logout</button>
+            </form></li>
+            <% end %>
+          </ul>
+        </div><!-- end navbar -->
+      </div><!-- end container -->
     </nav>
   </header>
-  <%= yield %>
+  <div class="main">
+    <%= yield %>
+  </div>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="/js/application.js"></script>
 </body>
 </html>
