@@ -2,6 +2,12 @@ body {
   min-height: 2000px;
   padding-top: 70px;
   background-color: #eee;
+  font-family: 'Railway', sans-serif;
+}
+
+h3 {
+  font-family: 'Droid Serif', serif;
+  color: #2E0219;
 }
 
 .panel {
@@ -11,15 +17,12 @@ body {
   padding-left: 0px;
   min-height: 320px;
 }
-/*
-<div class="col-md-4 panel panel-default order1" style="
-    padding-right: 0px;
-    padding-left: 0px;
-    left: auto;
-    margin-left: 10px;
-    margin-right: 10px;
-    right: auto;
-">*/
+
+.navbar-default .navbar-brand {
+  font-family: 'Dancing Script', cursive;
+  font-size: 25px;
+  color: #2E0219;
+}
 
 .form-signin {
   max-width: 330px;
