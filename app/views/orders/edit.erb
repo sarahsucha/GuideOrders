@@ -1,0 +1,108 @@
+<h3>Edit Order</h3>
+
+<div class="form-width">
+<div class="error">
+  <% if @errors.length > 0 %>
+    <% @errors.each do |error| %>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Error!</strong> <%= error %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<form class="form-horizontal" action="/orders/<%= @order[:id] %>/edit" method="POST">
+  <input type="hidden" name="_method" value="put">
+  <div class="form-group">
+    <label for="sold_date" class="col-sm-4 control-label">Date Sold</label>
+    <div class="col-sm-7">
+      <input id="sold_date" type="date" class="form-control" name="sold_date" value="<%= @order.sold_date %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="customer_first_name" class="col-sm-4 control-label">Customer's First Name</label>
+    <div class="col-sm-7">
+      <input id="customer_first_name" type="text" class="form-control" name="customer_first_name" value="<%= @customer.first_name %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="customer_last_name" class="col-sm-4 control-label">Customer's Last Name</label>
+    <div class="col-sm-7">
+      <input id="customer_last_name" type="text" class="form-control" name="customer_last_name" value="<%= @customer.last_name %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="customer_company" class="col-sm-4 control-label">Customer's Company</label>
+    <div class="col-sm-7">
+      <input id="customer_company" type="text" class="form-control" name="customer_company" value="<%= @customer.company %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="customer_email" class="col-sm-4 control-label">Customer's Email</label>
+    <div class="col-sm-7">
+      <input id="customer_email" type="text" class="form-control" name="customer_email" value="<%= @customer.email %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="currency_type" class="col-sm-4 control-label">Currency Sold Book In</label>
+    <div class="col-sm-7">
+      <select class="form-control" name="currency_type">
+        <option value="CZK" <%= (@order.currency_type == "CZK") ? 'selected="selected"' : '' %>>CZK</option>
+        <option value="EUR" <%= (@order.currency_type == "EUR") ? 'selected="selected"' : '' %>>EUR</option>
+        <option value="GBP" <%= (@order.currency_type == "GBP") ? 'selected="selected"' : '' %>>GBP</option>
+        <option value="USD" <%= (@order.currency_type == "USD") ? 'selected="selected"' : '' %>>USD</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="venice_quantity" class="col-sm-4 control-label">Number of Venice Books Sold</label>
+    <div class="col-sm-7">
+      <input id="venice_quantity" type="text" class="form-control" name="venice_quantity" value="<%= @venice_quantity %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="venice_price_paid_per_book_orig" class="col-sm-4 control-label">Price Paid Per Venice Book (Original Currency)</label>
+    <div class="col-sm-7">
+      <input id="venice_price_paid_per_book_orig" type="text" class="form-control" name="venice_price_paid_per_book_orig" value="<%= @venice_price_paid_per_book_orig %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="prague_quantity" class="col-sm-4 control-label">Number of Prague Books Sold</label>
+    <div class="col-sm-7">
+      <input id="prague_quantity" type="text" class="form-control" name="prague_quantity" value="<%= @prague_quantity %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="prague_price_paid_per_book_orig" class="col-sm-4 control-label">Price Paid Per Prague Book (Original Currency)</label>
+    <div class="col-sm-7">
+      <input id="prague_price_paid_per_book_orig" type="text" class="form-control" name="prague_price_paid_per_book_orig" value="<%= @prague_price_paid_per_book_orig %>">
+      <!-- <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span> -->
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-7">
+      <button type="submit" class="btn btn-default">Save Order</button>
+    </div>
+  </div>
+
+</div><!-- end form width class -->
+</form>

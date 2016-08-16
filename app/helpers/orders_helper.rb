@@ -14,8 +14,8 @@ helpers do
     date = "#{order.sold_date.year}-#{order.sold_date.month}-#{order.sold_date.day}"
     resp = RestClient.get 'http://api.fixer.io/latest', {:params => {:symbols => currency, :base => "CZK", :date => date}}
     currency_exchange = JSON.parse(resp.body)
-    p "*" * 80
-    p currency_exchange["rates"]["#{currency}"]
+    # p "*" * 80
+    # p currency_exchange["rates"]["#{currency}"]
     order.convert_to_czk(currency_exchange["rates"]["#{currency}"]).round
   end
 

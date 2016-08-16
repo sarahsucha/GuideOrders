@@ -10,6 +10,34 @@ h3 {
   color: #2E0219;
 }
 
+.btn-defaults {
+    text-shadow: 0 1px 0 #fff;
+    text-shadow: none;
+    color: #000;
+    border-color: #ccc;
+}
+
+.btn-defaults:hover {
+  color: #000;
+  text-shadow: none;
+  text-decoration: none;
+  background-color: #DAEFB3;
+}
+
+.panel-heading {
+  height: 50px;
+}
+
+.logout {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  height: 50px;
+}
+
+.nav li:hover {
+  text-decoration: underline;
+}
+
 .panel {
   margin-right: 10px;
   margin-left: 10px;
