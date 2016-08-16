@@ -1,0 +1,96 @@
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+  background-color: #eee;
+  font-family: 'Railway', sans-serif;
+}
+
+h3 {
+  font-family: 'Droid Serif', serif;
+  color: #2E0219;
+}
+
+.btn-defaults {
+    text-shadow: 0 1px 0 #fff;
+    text-shadow: none;
+    color: #000;
+    border-color: #ccc;
+}
+
+.btn-defaults:hover {
+  color: #000;
+  text-shadow: none;
+  text-decoration: none;
+  background-color: #DAEFB3;
+}
+
+.panel-heading {
+  height: 50px;
+}
+
+.logout {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  height: 50px;
+}
+
+.nav li:hover {
+  text-decoration: underline;
+}
+
+.panel {
+  margin-right: 10px;
+  margin-left: 10px;
+  padding-right: 0px;
+  padding-left: 0px;
+  min-height: 320px;
+}
+
+.navbar-default .navbar-brand {
+  font-family: 'Dancing Script', cursive;
+  font-size: 25px;
+  color: #2E0219;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+  .form-width {
+    max-width: 730px;
+    margin: 0 auto;
+  }
+}

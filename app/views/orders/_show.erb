@@ -1,16 +1,46 @@
-<div class="order<%= order.id %>">
-  Order ID: <%= order.id %><br>
-  Order Made By: <%= order.user.first_name %> <%= order.user.last_name %><br>
-  Sell Date: <%= order.sold_date.day %>/<%= order.sold_date.month %>/<%= order.sold_date.year %><br>
-  Customer: <%= order.customer.first_name %> <%= order.customer.last_name %><br>
-  Currency: <%= order.currency_type %><br>
-  <% order_items = order.order_items %>
-  <% order_items.each do |order_item| %>
-    Book Sold: <%= order_item.book.title %><br>
-    Quantity Sold: <%= order_item.quantity %><br>
-    Price Paid: <%= order_item.display_item_amount %> <%= order.currency_type %><br>
-  <% end %>
-  Order Total: <%= display_order_total(order) %> <%= order.currency_type %><br>
-  Order Total in CZK: <%= display_total_czk(order) %> CZK<br>
-  Is Reconciled? <%= order.is_reconciled %><br><br><br>
+<div class="col-md-5 panel panel-default order<%= order.id %>">
+  <div class="panel-heading">
+    <h4 class="panel-title">Order ID: <%= order.id %>
+      <div class="btn-group pull-right">
+        <a href="/orders/<%= order.id %>/edit" class="btn btn-defaults btn-sm">Edit</a>
+        <a href="#" class="btn btn-defaults btn-sm">Delete</a>
+      </h4>
+  </div>
+  <div class="panel-body">
+    <% if @orders_all == true %>
+      <span class="col-md-5">Order Made By:</span>
+      <span class="col-md-7"><%= order.user.first_name %> <%= order.user.last_name %></span><br>
+    <% end %>
+
+    <span class="col-md-5">Sell Date:</span>
+    <span class="col-md-7"> <%= order.sold_date.day %>/<%= order.sold_date.month %>/<%= order.sold_date.year %></span><br>
+
+    <span class="col-md-5">Customer:</span>
+    <span class="col-md-7"><%= order.customer.first_name %> <%= order.customer.last_name %></span><br>
+
+    <span class="col-md-5">Currency:</span>
+    <span class="col-md-7"><%= order.currency_type %></span><br>
+
+    <% order_items = order.order_items %>
+    <% order_items.each do |order_item| %>
+      <span class="col-md-12"><b><%= order_item.book.title %></b></span><br>
+
+      <span class="col-md-5">Quantity:</span>
+      <span class="col-md-7"><%= order_item.quantity %></span><br>
+
+      <span class="col-md-5">Price Paid:</span>
+      <span class="col-md-7"><%= order_item.display_item_amount %> <%= order.currency_type %></span><br>
+    <% end %>
+
+    <hr>
+
+    <span class="col-md-5">Order Total:</span>
+    <span class="col-md-7"><%= display_order_total(order) %> <%= order.currency_type %></span><br>
+
+    <span class="col-md-5">CZK Total:</span>
+    <span class="col-md-7"><%= display_total_czk(order) %> CZK</span><br>
+
+    <span class="col-md-5">Is Reconciled?</span>
+    <span class="col-md-7"><%= order.is_reconciled %></span><br>
+  </div>
 </div>
