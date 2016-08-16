@@ -8,6 +8,32 @@ body {
 h3 {
   font-family: 'Droid Serif', serif;
   color: #2E0219;
+  font-size: 1.5em;
+}
+
+hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #D1D1D1;
+}
+
+.panel-title {
+  font-family: 'Droid Serif', serif;
+  color: #4A001F;
+  font-size: 1.3em;
+}
+
+.pull-right {
+  font-family: 'Railway', sans-serif;
+}
+
+#login {
+  background-image: none;
+  background-color: #4A001F;
+}
+
+#login:hover {
+  background-color: #680016;
 }
 
 .btn-defaults {
@@ -48,8 +74,12 @@ h3 {
 
 .navbar-default .navbar-brand {
   font-family: 'Dancing Script', cursive;
-  font-size: 25px;
+  font-size: 2em;
   color: #2E0219;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: #6A0F49;
 }
 
 .form-signin {

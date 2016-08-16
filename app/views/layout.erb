@@ -30,22 +30,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Rabbit Guides Orders</a>
+          <a class="navbar-brand" href="/users/<%= session[:id] %>/orders/new">Rabbit Guides Orders</a>
         </div> <!-- end navbar-header -->
 
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="http://www.rabbitsguides.com">Rabbit Guides Website</a></li>
+            <% if !current_user %>
+              <li><a href="http://www.rabbitsguides.com">Rabbit Guides Website</a></li>
+            <% end %>
             <% if current_user %>
-            <li><a href="/users/<%= session[:id] %>/orders/new">New Order</a></li>
-            <li><a href="/users/<%= session[:id] %>/orders">Your Orders</a></li>
-            <li><a href="/orders">All Orders</a></li>
-            <li><a>Reconcile Orders(future)</a></li>
-            <!-- TODO - style this as an <a> tag with jquery -->
-            <li><form action="/sessions" method="POST">
-              <input type="hidden" name="_method" value="DELETE">
-              <button type="submit" class="logout btn btn-link">Logout</button>
-            </form></li>
+              <li><a href="/users/<%= session[:id] %>/orders/new">New Order</a></li>
+              <li><a href="/users/<%= session[:id] %>/orders">Your Orders</a></li>
+              <li><a href="/orders">All Orders</a></li>
+              <li><a>Reconcile Orders(future)</a></li>
+              <!-- TODO - style this as an <a> tag with jquery -->
+              <li><form action="/sessions" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="logout btn btn-link">Logout</button>
+              </form></li>
             <% end %>
           </ul>
         </div><!-- end navbar -->
