@@ -39,21 +39,21 @@ var deleteListener = function() {
     event.preventDefault();
     var address = $(this).attr('href');
     console.log(address);
-
     var that = this;
+    if (confirm("Are you sure you want to delete this order?")) {
+      var request = $.ajax({
+        url: address,
+        type: 'delete'
+      });
 
-    var request = $.ajax({
-      url: address,
-      type: 'delete'
-    });
+      request.done(function(response) {
+        console.log("Request successful");
+        $(that).parents('.panel-default').remove();
+      });
 
-    request.done(function(response) {
-      console.log("Request successful");
-      $(that).parents('.panel-default').remove();
-    });
-
-    request.fail(function(response) {
-      console.log("Request failed");
-    })
+      request.fail(function(response) {
+        console.log("Request failed");
+      });
+    }
   })
 }
