@@ -30,4 +30,30 @@ $(document).ready(function() {
   //   return this.href == path;
   // }).addClass('active');
 
+  deleteListener();
+
 });
+
+var deleteListener = function() {
+  $('.delete-btn').on('click', function(event) {
+    event.preventDefault();
+    var address = $(this).attr('href');
+    console.log(address);
+
+    var that = this;
+
+    var request = $.ajax({
+      url: address,
+      type: 'delete'
+    });
+
+    request.done(function(response) {
+      console.log("Request successful");
+      $(that).parents('.panel-default').remove();
+    });
+
+    request.fail(function(response) {
+      console.log("Request failed");
+    })
+  })
+}
