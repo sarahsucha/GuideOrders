@@ -7,40 +7,61 @@
       </h4>
   </div>
   <div class="panel-body">
-    <% if @orders_all == true %>
-      <span class="col-md-5">Order Made By:</span>
-      <span class="col-md-7"><%= order.user.first_name %> <%= order.user.last_name %></span><br>
-    <% end %>
+    <table class="table table-hover table-condensed">
+      <tbody>
+      <% if @orders_all == true %>
+        <tr>
+          <th>Order Made By:</th>
+          <td><%= order.user.first_name %> <%= order.user.last_name %></td>
+        </tr>
+      <% end %>
 
-    <span class="col-md-5">Sell Date:</span>
-    <span class="col-md-7"> <%= order.sold_date.day %>/<%= order.sold_date.month %>/<%= order.sold_date.year %></span><br>
+      <tr>
+        <th>Sell Date:</th>
+        <td> <%= order.sold_date.day %>/<%= order.sold_date.month %>/<%= order.sold_date.year %></td>
+      </tr>
 
-    <span class="col-md-5">Customer:</span>
-    <span class="col-md-7"><%= order.customer.first_name %> <%= order.customer.last_name %></span><br>
+      <tr>
+        <th>Customer:</th>
+        <td><%= order.customer.first_name %> <%= order.customer.last_name %></td>
+      </tr>
 
-    <span class="col-md-5">Currency:</span>
-    <span class="col-md-7"><%= order.currency_type %></span><br>
+      <tr>
+        <th>Currency:</th>
+        <td><%= order.currency_type %></td>
+      </tr>
 
-    <% order_items = order.order_items %>
-    <% order_items.each do |order_item| %>
-      <span class="col-md-12"><b><%= order_item.book.title %></b></span><br>
+      <% order_items = order.order_items %>
+      <% order_items.each do |order_item| %>
+        <tr>
+          <th>Book:</th>
+          <td><%= order_item.book.title %></td>
+        </tr>
+        <tr>
+          <th>Quantity:</th>
+          <td><%= order_item.quantity %></td>
+        </tr>
+        <tr>
+          <th>Price Paid:</th>
+          <td><%= order_item.display_item_amount %> <%= order.currency_type %></td>
+        </tr>
 
-      <span class="col-md-5">Quantity:</span>
-      <span class="col-md-7"><%= order_item.quantity %></span><br>
+      <% end %>
 
-      <span class="col-md-5">Price Paid:</span>
-      <span class="col-md-7"><%= order_item.display_item_amount %> <%= order.currency_type %></span><br>
-    <% end %>
+      <tr>
+        <th>Order Total:</th>
+        <td><%= display_order_total(order) %> <%= order.currency_type %></td>
+      </tr>
 
-    <hr>
-
-    <span class="col-md-5">Order Total:</span>
-    <span class="col-md-7"><%= display_order_total(order) %> <%= order.currency_type %></span><br>
-
-    <span class="col-md-5">CZK Total:</span>
-    <span class="col-md-7"><%= display_total_czk(order) %> CZK</span><br>
-
-    <span class="col-md-5">Is Reconciled?</span>
-    <span class="col-md-7"><%= order.is_reconciled %></span><br>
+      <tr>
+        <th>CZK Total:</th>
+        <td><%= display_total_czk(order) %> CZK</td>
+      </tr>
+      <tr>
+        <th>Is Reconciled?</th>
+        <td><%= order.is_reconciled %></td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
