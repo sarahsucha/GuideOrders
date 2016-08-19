@@ -5,6 +5,12 @@ body {
   font-family: 'Railway', sans-serif;
 }
 
+@media (max-width: 1090px) {
+  body {
+    padding-top: 140px;
+  }
+}
+
 h3 {
   font-family: 'Droid Serif', serif;
   color: #2E0219;
@@ -25,6 +31,15 @@ hr {
 
 .pull-right {
   font-family: 'Railway', sans-serif;
+}
+
+.panel-heading {
+  height: 50px;
+}
+
+.panel-body {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 #login {
@@ -48,10 +63,6 @@ hr {
   text-shadow: none;
   text-decoration: none;
   background-color: #DAEFB3;
-}
-
-.panel-heading {
-  height: 50px;
 }
 
 .logout {

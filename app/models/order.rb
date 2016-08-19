@@ -13,12 +13,17 @@ class Order < ActiveRecord::Base
     order_items.each do |order_item|
       order_total += order_item.price_paid_per_book_orig * order_item.quantity
     end
-    order_total.to_f / 100
+      order_total.to_f / 100
   end
 
   def convert_to_czk(rate)
     p self.order_total
-    self.order_total / rate
+    p rate
+    if rate == nil
+      self.order_total
+    else
+      self.order_total / rate
+    end
   end
 
 end
