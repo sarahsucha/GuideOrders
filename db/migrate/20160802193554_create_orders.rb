@@ -5,8 +5,7 @@ class CreateOrders < ActiveRecord::Migration
       t.integer :customer_id
       t.date :sold_date, null: false
       t.string :currency_type, limit: 5, null: false
-      t.integer :czk_conversion_id
-      t.boolean :is_reconciled, default: false
+       t.boolean :is_reconciled, default: false
 
       t.timestamps null: false
     end
