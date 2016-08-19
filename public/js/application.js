@@ -11,7 +11,7 @@ $(document).ready(function() {
   // if(path == '') {
   //   path = '/';
   // }
-
+  // TODO when the call is a post, should not change the class.
   $('.nav [href="' + path + '"]').parent().addClass('active');
 
   // $('.nav [href="' + path + '"]').addClass('active');

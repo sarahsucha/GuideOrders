@@ -48,9 +48,6 @@ post '/users/:id/orders' do
     erb :"orders/new"
   end
 
-  # if @errors.length > 0
-  #   erb :"orders/new"
-  # end
 end
 
 # combine all of the order detail views
@@ -91,76 +88,57 @@ end
 
 # Orders UPDATE
 put '/orders/:id/edit' do
-  order = Order.find(params[:id])
-  @errors = []
+  @order = Order.find(params[:id])
+  # @errors = []
   # if quantity does not exist for either venice or prague
   # p "*" * 80
+  p params
+  @customer = Customer.find_by(email: params["customer_email"])
 
-  customer = Customer.find_by(email: params["customer_email"])
-  customer.update_attributes(first_name: params["customer_first_name"], last_name: params["customer_last_name"], company: params["customer_company"], email: params["customer_email"])
+  @customer.update_attributes(first_name: params["customer_first_name"], last_name: params["customer_last_name"], company: params["customer_company"], email: params["customer_email"])
 
-  order.update_attributes(sold_date: params["sold_date"], currency_type: params["currency_type"])
+  @order.update_attributes(sold_date: params["sold_date"], currency_type: params["currency_type"])
 
-  order_items = order.order_items
-  p "*" * 80
-  p order_items
+  @order_items = @order.order_items
 
   #if the order item exists, update it, if it doesn't exist, create a new one.
-  venice_exists =  order.order_items.any? { |order_item| order_item.book_id == 1 }
+  venice_exists =  @order.order_items.any? { |order_item| order_item.book_id == 1 }
+  p venice_exists
+  @venice_item = @order.order_items.find_by(book_id: 1)
+  p "*" * 80
+  p @venice_item
 
   if venice_exists && params["venice_quantity"].to_i == 0
     p "I'm deleting the Venice item"
-    order_item.destroy
+    @venice_item.destroy
   elsif venice_exists && params["venice_quantity"].to_i > 0
     p "I'm updating the Venice item"
-    venice_item = order.order_items.find_by(book_id: 1)
     venice_price_to_save = save_price_original(params["venice_price_paid_per_book_orig"])
     venice_item.update_attributes(quantity: params["venice_quantity"], price_paid_per_book_orig: venice_price_to_save)
   elsif !venice_exists && params["venice_quantity"].to_i > 0
     p "I'm creating a new Venice item"
     venice_price_to_save = save_price_original(params["venice_price_paid_per_book_orig"])
-    OrderItem.create(quantity: params["venice_quantity"], price_paid_per_book_orig: venice_price_to_save, book_id: 1, order_id: order[:id])
+    OrderItem.create(quantity: params["venice_quantity"], price_paid_per_book_orig: venice_price_to_save, book_id: 1, order_id: @order[:id])
   end
 
-  prague_exists =  order.order_items.any? { |order_item| order_item.book_id == 2 }
+  prague_exists =  @order.order_items.any? { |order_item| order_item.book_id == 2 }
+  @prague_item = @order.order_items.find_by(book_id: 2)
 
   if prague_exists && params["prague_quantity"].to_i == 0
     p "I'm deleting the Prague item"
-    order_item.destroy
+    @prague_item.destroy
   elsif prague_exists && params["prague_quantity"].to_i > 0
     p "I'm updating the Prague item"
-    prague_item = order.order_items.find_by(book_id: 2)
     prague_price_to_save = save_price_original(params["prague_price_paid_per_book_orig"])
-    prague_item.update_attributes(quantity: params["prague_quantity"], price_paid_per_book_orig: prague_price_to_save)
+    @prague_item.update_attributes(quantity: params["prague_quantity"], price_paid_per_book_orig: prague_price_to_save)
   elsif !prague_exists && params["prague_quantity"].to_i > 0
     p "I'm creating a new Prague item"
     prague_price_to_save = save_price_original(params["prague_price_paid_per_book_orig"])
-    OrderItem.create(quantity: params["prague_quantity"], price_paid_per_book_orig: prague_price_to_save, book_id: 2, order_id: order[:id])
+    OrderItem.create(quantity: params["prague_quantity"], price_paid_per_book_orig: prague_price_to_save, book_id: 2, order_id: @order[:id])
   end
 
-  # p order_items
-  # #make sure an order item exists.
-  # venice_exists =  order.order_items.any? { |order_item| order_item.book_id == 1 } #false
-  # prague_exists =  order.order_items.any? { |order_item| order_item.book_id == 2 } #false
-  #
-  # if venice_exists == false && prague_exists == false
-  #   p "I'm in the if that no venice or prague has been created"
-  #   @errors << "An entry for Venice or Prague books must be made."
-  # end
-
-  # # if venice quantity > 0, price paid must exist
-  # if params["venice_quantity"].to_i > 0 && (params["venice_price_paid_per_book_orig"] == "")
-  #   # p "I'm in the if that venice price has not been entered"
-  #   @errors << "Venice book must have an original price"
-  # end
-  #
-  # if params["prague_quantity"].to_i > 0 && (params["prague_price_paid_per_book_orig"] == "")
-  #   # p "I'm in the if that prague price has not been entered"
-  #   @errors << "Prague book must have an original price"
-  # end
-
+  @errors = check_for_errors(params)
   if @errors.length > 0
-    # p "I'm in the if that errors length is > 0"
     return erb :"orders/edit"
   end
 
