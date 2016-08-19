@@ -18,6 +18,8 @@ gem 'bcrypt'
 gem 'money'
 gem 'rest-client'
 
+gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
+
 group :test do
   gem 'shoulda-matchers'
   gem 'rack-test'
