@@ -1,0 +1,67 @@
+<div class="col-md-5 panel panel-default order<%= order.id %>">
+  <div class="panel-heading">
+    <h4 class="panel-title">Order ID: <%= order.id %>
+      <div class="btn-group pull-right">
+        <a href="/orders/<%= order.id %>/edit" class="btn btn-defaults btn-sm">Edit</a>
+        <a href="/orders/<%= order.id %>" class="delete-btn btn btn-defaults btn-sm">Delete</a>
+      </h4>
+  </div>
+  <div class="panel-body">
+    <table class="table table-hover table-condensed">
+      <tbody>
+      <% if @orders_all == true %>
+        <tr>
+          <th>Order Made By:</th>
+          <td><%= order.user.first_name %> <%= order.user.last_name %></td>
+        </tr>
+      <% end %>
+
+      <tr>
+        <th>Sell Date:</th>
+        <td> <%= order.sold_date.day %>/<%= order.sold_date.month %>/<%= order.sold_date.year %></td>
+      </tr>
+
+      <tr>
+        <th>Customer:</th>
+        <td><%= order.customer.first_name %> <%= order.customer.last_name %></td>
+      </tr>
+
+      <tr>
+        <th>Currency:</th>
+        <td><%= order.currency_type %></td>
+      </tr>
+
+      <% order_items = order.order_items %>
+      <% order_items.each do |order_item| %>
+        <tr>
+          <th>Book:</th>
+          <td><%= order_item.book.title %></td>
+        </tr>
+        <tr>
+          <th>Quantity:</th>
+          <td><%= order_item.quantity %></td>
+        </tr>
+        <tr>
+          <th>Price Paid:</th>
+          <td><%= order_item.display_item_amount %> <%= order.currency_type %></td>
+        </tr>
+
+      <% end %>
+
+      <tr>
+        <th>Order Total:</th>
+        <td><%= display_order_total(order) %> <%= order.currency_type %></td>
+      </tr>
+
+      <tr>
+        <th>CZK Total:</th>
+        <td><%= display_total_czk(order) %> CZK</td>
+      </tr>
+      <tr>
+        <th>Is Reconciled?</th>
+        <td><%= order.is_reconciled %></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

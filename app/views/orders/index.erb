@@ -1,0 +1,11 @@
+<% if @orders_all == true %>
+  <h3>All Orders Summary</h3>
+<% else %>
+  <h3>Your Order Summary</h3>
+<% end %>
+
+<div>
+  <% @orders.each do |order|%>
+    <%= erb(:"orders/_show", :layout => false, :locals => { :order => order }) %>
+  <% end %>
+</div>
